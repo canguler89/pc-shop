@@ -9,12 +9,14 @@ class GraphicCard extends Component {
       <div>
         <ul className="items-ul">
           {cardList.map(card => (
-            <li className="col-sm-3">
+            <li className="cases1">
               <img src={card.img} alt="cpus" />
               {card.title}
               <br />
+              <div className="price">
               {card.price}
               {card.currency}
+              </div>
               <button className={"btn btn-primary"} onClick={this.handleClick}>
                 AddToCart
               </button>

@@ -1,41 +1,40 @@
-import React, { Component } from "react";
-import data from "../data/data";
+import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../actions/actionCreator"
 
-const caseList = data.cases;
 
-class Cases extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
+function Cases(props){
 
-  handleClick = e => {
-    e.preventDefault();
-    console.log("item added to cart");
-  };
-
-  render() {
-    let casesArray = caseList.map(c => (
-      <li className="cases1" key={c.id}>
-        <img src={c.img} alt="ada" />
-        {c.company}
-        <br />
-        <div className="price">
-          {c.price}
-          {c.currency}
-        </div>
-        <button className={"btn btn-primary"} onClick={this.handleClick}>
-          AddToCart
-        </button>
-      </li>
-    ));
     return (
       <div>
         <h1> Our Computer Case List </h1>
-        <ul className="items-ul">{casesArray}</ul>
+
+        {props.items.cases.map(item=>(
+          <div key={item.id} className="cases1">
+            <ul className="items-ul">
+              <li>
+                <img src={item.img} alt="sad"></img>
+              </li>
+            </ul>
+            <div className="price">
+              {item.company}
+              <br/>
+              {item.price}
+              {item.currency}
+            </div>
+            <button className={"btn btn-primary"}>AddToCart</button>
+          </div>
+        ))}
       </div>
     );
+  
+}
+
+function mapStateToProps(state){
+  return{
+    items: state.items,
+    cart: state.cart
   }
 }
 
-export default Cases;
+export default connect(mapStateToProps, {addToCart})(Cases);

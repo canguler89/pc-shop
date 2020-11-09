@@ -1,4 +1,15 @@
-import { ADD_TO_CART, REMOVE } from "./actionsTypes";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE = "REMOVE";
 
-export const addToCart = () => ({ type: ADD_TO_CART });
-export const remove = () => ({ type: REMOVE });
+export function addToCart(item){
+    return{
+        type: ADD_TO_CART,
+        payload: item
+    }
+}
+export function remove(item){
+    return{
+        type: REMOVE,
+        payload: item
+    }
+}

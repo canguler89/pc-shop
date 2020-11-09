@@ -27,7 +27,7 @@
   background: #57c7e9;
 }
 .nav-li {
-  padding: 1rem 0.8rem 1.15rem;
+  padding: 0.8rem;
   text-transform: uppercase;
   cursor: pointer;
   color: #ebebeb;
@@ -65,5 +65,5 @@
 }
 
 .container {
-  margin: 2.5%;
+  margin-top: 2.5%;
 }
