@@ -21,7 +21,7 @@ function Mouses(props){
               <br/>
               Price: &#36; {item.price}
             </div>
-            <button className={"btn btn-primary"}>AddToCart</button>
+            <button className={"btn btn-primary"} onClick={()=> props.addToCart(item)}>AddToCart</button>
           </div>
         ))}
       </div>
