@@ -1,31 +1,39 @@
-import React, { Component } from "react";
-import data from "../data/data";
+import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../actions/actionCreator"
 
-const cardList = data.cards;
 
-class GraphicCard extends Component {
-  render() {
+function GraphicCard(props){
+
     return (
       <div>
-        <ul className="items-ul">
-          {cardList.map(card => (
-            <li className="cases1">
-              <img src={card.img} alt="cpus" />
-              {card.title}
-              <br />
-              <div className="price">
-              {card.price}
-              {card.currency}
-              </div>
-              <button className={"btn btn-primary"} onClick={this.handleClick}>
-                AddToCart
-              </button>
-            </li>
-          ))}
-        </ul>
+        <h1> Our Graphic Card List </h1>
+
+        {props.items.cards.map(item=>(
+          <div key={item.id} className="cases1">
+            <ul className="items-ul">
+              <li>
+                <img src={item.img} alt="sad"></img>
+              </li>
+            </ul>
+            <div className="price">
+              {item.company}
+              <br/>
+              Price: &#36; {item.price}
+            </div>
+            <button className={"btn btn-primary"}>AddToCart</button>
+          </div>
+        ))}
       </div>
     );
+  
+}
+
+function mapStateToProps(state){
+  return{
+    items: state.items,
+    cart: state.cart
   }
 }
 
-export default GraphicCard;
+export default connect(mapStateToProps, {addToCart})(GraphicCard);

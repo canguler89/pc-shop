@@ -1,42 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../actions/actionCreator"
 
-class Ram extends Component {
-  render() {
+
+function Ram(props){
+
     return (
       <div>
-        <img
-          src={process.env.PUBLIC_URL + "/images/rams/corsair.jpg"}
-          alt="ram1"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/rams/OLOy.jpg"}
-          alt="ram2"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/rams/ripjaws.jpg"}
-          alt="ram3"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/rams/Trident.jpg"}
-          alt="ram4"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/rams/vulcanz.jpg"}
-          alt="ram5"
-          width="200px"
-          height="200px"
-        />
+        <h1> Our Ram List </h1>
+
+        {props.items.rams.map(item=>(
+          <div key={item.id} className="cases1">
+            <ul className="items-ul">
+              <li>
+                <img src={item.img} alt="sad" className="images1"></img>
+              </li>
+            </ul>
+            <div className="price">
+              {item.title}
+              <br/>
+              Price: &#36; {item.price}
+            </div>
+            <button className={"btn btn-primary"}>AddToCart</button>
+          </div>
+        ))}
       </div>
     );
+  
+}
+
+function mapStateToProps(state){
+  return{
+    items: state.items,
+    cart: state.cart
   }
 }
 
-export default Ram;
+export default connect(mapStateToProps, {addToCart})(Ram);

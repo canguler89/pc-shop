@@ -1,42 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../actions/actionCreator"
 
-class HardDrives extends Component {
-  render() {
+
+function HardDrives(props){
+
     return (
       <div>
-        <img
-          src={process.env.PUBLIC_URL + "/images/hard-disk/samsung 1tb ssd.jpg"}
-          alt="disk1"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/hard-disk/samsung ssd 2tb.jpg"}
-          alt="disk2"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/hard-disk/wd black1tb.jpg"}
-          alt="disk1"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/hard-disk/seagate 1tb.jpg"}
-          alt="disk1"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/hard-disk/exos.jpg"}
-          alt="disk1"
-          width="200px"
-          height="200px"
-        />
+        <h1> Our Hard Drive List </h1>
+
+        {props.items.memory.map(item=>(
+          <div key={item.id} className="cases1">
+            <ul className="items-ul">
+              <li>
+                <img src={item.img} alt="sad" className="images1"></img>
+              </li>
+            </ul>
+            <div className="price">
+              {item.company}
+              <br/>
+              Price: &#36; {item.price}
+            </div>
+            <button className={"btn btn-primary"}>AddToCart</button>
+          </div>
+        ))}
       </div>
     );
+  
+}
+
+function mapStateToProps(state){
+  return{
+    items: state.items,
+    cart: state.cart
   }
 }
 
-export default HardDrives;
+export default connect(mapStateToProps, {addToCart})(HardDrives);

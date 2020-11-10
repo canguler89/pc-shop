@@ -1,42 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../actions/actionCreator"
 
-class Mainboards extends Component {
-  render() {
+
+function Mainboards(props){
+
     return (
       <div>
-        <img
-          src={process.env.PUBLIC_URL + "/images/main-boards/aqua.jpg"}
-          alt="main1"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/main-boards/asrock.jpg"}
-          alt="main2"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/main-boards/asus.jpg"}
-          alt="main3"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/main-boards/gigabyte.jpg"}
-          alt="main4"
-          width="200px"
-          height="200px"
-        />
-        <img
-          src={process.env.PUBLIC_URL + "/images/main-boards/msi.jpg"}
-          alt="main5"
-          width="200px"
-          height="200px"
-        />
+        <h1> Our Mainboard List </h1>
+
+        {props.items.mainboards.map(item=>(
+          <div key={item.id} className="cases1">
+            <ul className="items-ul">
+              <li>
+                <img src={item.img} alt="sad" className="images1"></img>
+              </li>
+            </ul>
+            <div className="price">
+              {item.title}
+              <br/>
+              Price: &#36; {item.price}
+            </div>
+            <button className={"btn btn-primary"}>AddToCart</button>
+          </div>
+        ))}
       </div>
     );
+  
+}
+
+function mapStateToProps(state){
+  return{
+    items: state.items,
+    cart: state.cart
   }
 }
 
-export default Mainboards;
+export default connect(mapStateToProps, {addToCart})(Mainboards);

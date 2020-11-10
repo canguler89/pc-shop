@@ -1,36 +1,39 @@
-import React, { Component } from "react";
-import data from "../data/data";
+import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../actions/actionCreator"
 
-const CpuList = data.cpus;
 
-class Cpu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
+function Cpu(props){
+
     return (
       <div>
-        <h2>CPU LIST IN HERE</h2>
-        <ul className="items-ul">
-          {CpuList.map(cp => (
-            <li className="cases1">
-              <img src={cp.img} alt="cpus" />
-              {cp.title}
-              <br />
-              <div className="price">
-                {cp.price}
-                {cp.currency}
-              </div>
-              <button className={"btn btn-primary"} onClick={this.handleClick}>
-                AddToCart
-              </button>
-            </li>
-          ))}
-        </ul>
+        <h1> Our CPU List </h1>
+
+        {props.items.cpus.map(item=>(
+          <div key={item.id} className="cases1">
+            <ul className="items-ul">
+              <li>
+                <img src={item.img} alt="sad"></img>
+              </li>
+            </ul>
+            <div className="price">
+              {item.title}
+              <br/>
+              Price: &#36; {item.price}
+            </div>
+            <button className={"btn btn-primary"}>AddToCart</button>
+          </div>
+        ))}
       </div>
     );
+  
+}
+
+function mapStateToProps(state){
+  return{
+    items: state.items,
+    cart: state.cart
   }
 }
 
-export default Cpu;
+export default connect(mapStateToProps, {addToCart})(Cpu);

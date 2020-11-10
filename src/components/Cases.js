@@ -4,7 +4,7 @@ import { addToCart } from "../actions/actionCreator"
 
 
 function Cases(props){
-
+    console.log(props.cart)
     return (
       <div>
         <h1> Our Computer Case List </h1>
@@ -19,10 +19,9 @@ function Cases(props){
             <div className="price">
               {item.company}
               <br/>
-              {item.price}
-              {item.currency}
+              Price: &#36; {item.price}
             </div>
-            <button className={"btn btn-primary"}>AddToCart</button>
+            <button className={"btn btn-primary"} onClick={()=> props.addToCart(item)}>AddToCart</button>
           </div>
         ))}
       </div>
